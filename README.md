@@ -1,4 +1,4 @@
-# Project for C#1
+# Project for C#2
 
 ## Description
 The aim of this project is to create a simple escape room reservation system. 
