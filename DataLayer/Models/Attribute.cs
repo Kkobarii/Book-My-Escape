@@ -15,6 +15,7 @@ namespace DataLayer.Models
     {
 
     }
+
     public class DbColumnNameAttribute : Attribute
     {
         public string Name { get; set; }
