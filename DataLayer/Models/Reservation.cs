@@ -21,7 +21,7 @@ namespace DataLayer.Models
 
         public override string? ToString()
         {
-            return $"Reservation {Id}:\n{User}\n{Room}\n  Check in: {CheckIn}\n  Check out: {CheckOut}";
+            return $"Reservation {Id}:\n  Check in: {CheckIn}\n  Check out: {CheckOut}\n{User}\n{Room}";
         }
     }
 }
