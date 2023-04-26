@@ -28,7 +28,23 @@ namespace Testing
                 Password = "aaa"
             };
 
-            //Database.Insert(user);
+            Room room = new Room()
+            {
+                Id = 1,
+                Capacity = 5,
+                IsAvailable = true,
+                Price = 800
+            };
+
+            Reservation reservation = new Reservation()
+            {
+                User = user,
+                Room = room,
+                CheckIn = new DateTime(2008, 5, 1, 8, 30, 52),
+                CheckOut = new DateTime(2008, 5, 2, 8, 30, 52)
+            };
+
+            //Database.Insert(reservation);
             //Console.WriteLine(user.Id);
 
             //Database.Update(user);
@@ -38,9 +54,9 @@ namespace Testing
             data["Password"] = "aaa";
             data["LastName"] = "Mrkvička";
 
-            //var res = Database.Select<User>(1);
+            var res = Database.Select<Reservation>(1);
             //var res = Database.Select<User>("Password" , "aaa");
-            var res = Database.Select<User>(data);
+            //var res = Database.Select<User>(data);
 
             foreach (var item in res)
             {

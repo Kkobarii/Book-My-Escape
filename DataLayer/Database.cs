@@ -1,6 +1,7 @@
 ﻿using DataLayer.Models;
 using Microsoft.Data.Sqlite;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data;
@@ -57,6 +58,10 @@ namespace DataLayer
             {
                 return "REAL";
             }
+            else if (property.PropertyType == typeof(double) || property.PropertyType == typeof(double?))
+            {
+                return "REAL";
+            }
             else if (property.PropertyType == typeof(bool) || property.PropertyType == typeof(bool?))
             {
                 return "INTEGER";
@@ -86,6 +91,13 @@ namespace DataLayer
             return String.Join(' ', sqlParams);
         }
 
+        private static int getId<T>(T entry)
+        {
+            Type type = typeof(T);
+            var idProperty = type.GetProperties().Where(x => CheckAttribute<DbPrimaryKeyAttribute>(x)).ToArray()[0];
+            return Convert.ToInt32(idProperty.GetValue(entry));
+        }
+
         private static int getLastId()
         {
             return Convert.ToInt32(ExecuteScalar("SELECT last_insert_rowid()")!);
@@ -94,14 +106,7 @@ namespace DataLayer
 
         public static void CreateDatabase()
         {
-            using (SqliteConnection conn = new SqliteConnection(_connectionString))
-            {
-                conn.Open();
-                using (SqliteCommand command = conn.CreateCommand())
-                {
-                    command.ExecuteNonQuery();
-                }
-            }
+            ExecuteNonQuery("");
         }
 
         public static DataTable ExecuteQuery(string query)
@@ -293,7 +298,16 @@ namespace DataLayer
             {
                 var value = property.GetValue(entry);
                 values.Add("@" + getPropertyName(property));
-                attributes["@" + getPropertyName(property)] = value ?? DBNull.Value;
+                if (CheckAttribute<DbForeignKeyAttribute>(property))
+                {
+                    Type type1 = value.GetType();
+                    var idProperty2 = type1.GetProperties().Where(x => CheckAttribute<DbPrimaryKeyAttribute>(x)).ToArray()[0];
+                    int foreignId = Convert.ToInt32(idProperty2.GetValue(value)!);
+
+                    attributes["@" + getPropertyName(property)] = foreignId;
+                }
+                else
+                    attributes["@" + getPropertyName(property)] = value ?? DBNull.Value;
             }
 
             stringBuilder.Append(string.Join(", ", values));
@@ -363,7 +377,8 @@ namespace DataLayer
 
         public static List<T> Select<T>(int id) where T : new()
         {
-            var idProperty = typeof(T).GetProperties().Where(x => CheckAttribute<DbPrimaryKeyAttribute>(x)).ToArray()[0];
+            Type type = typeof(T);
+            var idProperty = type.GetProperties().Where(x => CheckAttribute<DbPrimaryKeyAttribute>(x)).ToArray()[0];
             Dictionary<string, object> attributes = new Dictionary<string, object>();
             attributes.Add(idProperty.Name, id);
             return Select<T>(attributes);
@@ -390,7 +405,7 @@ namespace DataLayer
             List<string> pain = new List<string>();
             foreach (var item in properties)
             {
-                pain.Add(item.Name);
+                pain.Add(getPropertyName(item));
             }
 
             stringBuilder.Append(string.Join(", ", pain));
@@ -421,12 +436,24 @@ namespace DataLayer
                 {
                     object? value = (object)row[getPropertyName(property)];
 
-                    if (value == DBNull.Value)
+                    if (CheckAttribute<DbForeignKeyAttribute>(property))
+                    {
+                        //MethodInfo method = typeof(Database).GetMethod(MethodBase.GetCurrentMethod()!.Name)!;
+                        MethodInfo method = typeof(Database).GetMethods().Where(m => m.Name == "Select").First();   // todo get current method
+                        MethodInfo generic = method.MakeGenericMethod(property.PropertyType);
+                        var foreignItem = ((IEnumerable)generic.Invoke(null, new object[] { Convert.ToInt32(value) })!).Cast<object>().ToList();
+                        property.SetValue(entry, foreignItem[0]);
+                    }
+                    else if (value == DBNull.Value)
                         property.SetValue(entry, null);
                     else if (property.PropertyType == typeof(int) || property.PropertyType == typeof(int?))
                         property.SetValue(entry, Convert.ToInt32(value));
                     else if (property.PropertyType == typeof(bool))
                         property.SetValue(entry, Convert.ToBoolean(value));
+                    else if (property.PropertyType == typeof(DateTime))
+                        property.SetValue(entry, Convert.ToDateTime(value));
+                    else if (property.PropertyType == typeof(double))
+                        property.SetValue(entry, Convert.ToDecimal(value));
                     else
                         property.SetValue(entry, value);
                 }
