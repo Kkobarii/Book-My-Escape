@@ -11,7 +11,7 @@ namespace DataLayer.Models
     public class Reservation
     {
         [DbPrimaryKey]
-        public int? Id { get; set; }
+        public long? Id { get; set; }
         [DbForeignKey, DbColumnName("UserId")]
         public User User { get; set; }
         [DbForeignKey, DbColumnName("RoomId")]
