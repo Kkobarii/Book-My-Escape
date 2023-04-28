@@ -1,20 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace DataLayer.Models
+﻿namespace DataLayer.Models
 {
-    public class DbPrimaryKeyAttribute : Attribute
-    {
+    public class DbPrimaryKeyAttribute : Attribute { }
 
-    }
-
-    public class DbForeignKeyAttribute : Attribute
-    {
-
-    }
+    public class DbForeignKeyAttribute : Attribute { }
 
     public class DbColumnNameAttribute : Attribute
     {
