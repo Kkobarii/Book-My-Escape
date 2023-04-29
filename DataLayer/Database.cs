@@ -1,5 +1,6 @@
 ﻿using Microsoft.Data.Sqlite;
 using System.Data;
+using System.Reflection;
 
 namespace DataLayer
 {
@@ -132,6 +133,12 @@ namespace DataLayer
             ExecuteNonQuery(query);
         }
 
+        public static void Insert<T>(Type type, T entry)
+        {
+            MethodInfo method = typeof(Database).GetMethods().Where(m => m.Name == "Insert" && m.GetParameters().Length == 1).First();
+            MethodInfo generic = method.MakeGenericMethod(type);
+            generic.Invoke(null, new object[] { entry! });
+        }
         public static void Insert<T>(T entry)
         {
             if (Mapper.GetPrimaryIdValue(entry) != null)
@@ -144,6 +151,12 @@ namespace DataLayer
             Mapper.SetPrimaryIdValue(entry, id);
         }
 
+        public static void Update<T>(Type type, T entry)
+        {
+            MethodInfo method = typeof(Database).GetMethods().Where(m => m.Name == "Update" && m.GetParameters().Length == 1).First();
+            MethodInfo generic = method.MakeGenericMethod(type);
+            generic.Invoke(null, new object[] { entry! });
+        }
         public static void Update<T>(T entry)
         {
             if (Mapper.GetPrimaryIdValue(entry) == null)
@@ -153,6 +166,12 @@ namespace DataLayer
             ExecuteNonQuery(query);
         }
 
+        public static void Delete<T>(Type type, T entry)
+        {
+            MethodInfo method = typeof(Database).GetMethods().Where(m => m.Name == "Delete" && m.GetParameters().Length == 1).First();
+            MethodInfo generic = method.MakeGenericMethod(type);
+            generic.Invoke(null, new object[] { entry! });            
+        }
         public static void Delete<T>(T entry)
         {
             if (Mapper.GetPrimaryIdValue(entry) == null)
