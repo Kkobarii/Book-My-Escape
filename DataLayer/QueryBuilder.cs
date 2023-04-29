@@ -115,7 +115,6 @@ namespace DataLayer
 
             return (stringBuilder.ToString(), attributes);
         }
-
         public static (string, Dictionary<string, object>) GetDeleteQuery<T>(T entry)
         {
             Type type = typeof(T);
@@ -130,7 +129,7 @@ namespace DataLayer
 
             string idName = Mapper.GetPrimaryIdName<T>();
             long? idValue = Mapper.GetPrimaryIdValue(entry);
-            stringBuilder.Append($"{idName} = @ {idName}");
+            stringBuilder.Append($"{idName} = @{idName}");
             attributes["@" + idName] = idValue ?? throw new Exception("Primary key is null");
 
             stringBuilder.AppendLine(";");
