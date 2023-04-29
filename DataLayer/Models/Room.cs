@@ -10,13 +10,15 @@ namespace DataLayer.Models
     {
         [DbPrimaryKey]
         public long? Id { get; set; }
+        public string Name { get; set; }
+        public string? Description { get; set; }
+        public int Difficulty { get; set; }
         public int Capacity { get; set; }
-        public double? Price { get; set; }
-        public bool IsAvailable { get; set; }
+        public double Price { get; set; }
 
         public override string? ToString()
         {
-            return $"Room {Id}:\n  Capacity: {Capacity}\n  Price: {((Price == null) ? "null" : Price.ToString())}\n  Is available? {(IsAvailable ? "true" : "false")}";
+            return $"{Name}";
         }
     }
 }

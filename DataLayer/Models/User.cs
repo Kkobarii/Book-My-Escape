@@ -13,12 +13,14 @@ namespace DataLayer.Models
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Email { get; set; }
+        public string PhoneNumber { get; set; }
         public string Password { get; set; }
         public bool IsAdmin { get; set; }
 
         public override string? ToString()
         {
-            return $"User {Id}: {FirstName} {LastName}\n  Email: {Email}\n  Password: {Password} (Do not steal)\n  Is admin? {(IsAdmin ? "true": "false")}";
+            return $"{FirstName} {LastName}";
+            //return $"User {Id}:\n  Name: {FirstName} {LastName}\n  Email: {Email}\n  Phone number: {PhoneNumber}\n  Is admin: {IsAdmin}";
         }
     }
 }

@@ -1,14 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace DataLayer.Models
 {
-    public class Reservation
+    public class Review
     {
         [DbPrimaryKey]
         public long? Id { get; set; }
@@ -16,12 +14,12 @@ namespace DataLayer.Models
         public User User { get; set; }
         [DbForeignKey, DbColumnName("RoomId")]
         public Room Room { get; set; }
-        public DateTime CheckIn { get; set; }
-        public DateTime CheckOut { get; set; }
+        public string Text { get; set; }
+        public int Rating { get; set; }
 
         public override string? ToString()
         {
-            return $"{User} for {Room}";
+            return $"{Id}: {Room} by {User}";
         }
     }
 }
