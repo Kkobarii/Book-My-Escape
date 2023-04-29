@@ -14,7 +14,7 @@ namespace DataLayer
 
         public static bool CheckNullable(PropertyInfo property)
         {
-            return Nullable.GetUnderlyingType(property.PropertyType) != null;
+            return new NullabilityInfoContext().Create(property).WriteState is NullabilityState.Nullable;
         }
 
         public static string GetPropertyName(PropertyInfo property)
@@ -86,7 +86,7 @@ namespace DataLayer
         
         public static long? GetPrimaryIdValue<T>(T entry)
         {
-            Type type = typeof(T);
+            Type type =  typeof(T);
             
             var idList = type.GetProperties().Where(x => CheckAttribute<DbPrimaryKeyAttribute>(x)).ToArray();
             if (idList.Length != 1)
@@ -150,7 +150,7 @@ namespace DataLayer
         {
             if (value == DBNull.Value)
                 return null;
-            else if (CheckNullable(property))
+            else if (CheckNullable(property) && property.PropertyType != typeof(string))
                 return Convert.ChangeType(value, Nullable.GetUnderlyingType(property.PropertyType)!);
             else
                 return Convert.ChangeType(value, property.PropertyType);
