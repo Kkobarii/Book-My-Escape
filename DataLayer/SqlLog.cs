@@ -29,5 +29,10 @@ namespace DataLayer
                 }
             }
         }
+        
+        public static void ClearFile()
+        {
+            File.WriteAllText(GlobalConfig.LogFilePath, string.Empty);
+        }
     }
 }
