@@ -6,6 +6,7 @@ namespace DataLayer
 {
     public class Database
     {
+        private static string _connectionString = "Data Source=" + GlobalConfig.DatabasePath;
         private static long getLastId()
         {
             return Convert.ToInt32(ExecuteScalar("SELECT last_insert_rowid()\n")!);
@@ -21,7 +22,7 @@ namespace DataLayer
         }
         public static DataTable ExecuteQuery(string query, Dictionary<string, object> parameters)
         {
-            using (SqliteConnection conn = new SqliteConnection(GlobalConfig.ConnectionString))
+            using (SqliteConnection conn = new SqliteConnection(Database._connectionString))
             {
                 conn.Open();
                 using (SqliteCommand command = conn.CreateCommand())
@@ -53,7 +54,7 @@ namespace DataLayer
         }
         public static void ExecuteNonQuery(string query, Dictionary<string, object> parameters)
         {
-            using (SqliteConnection conn = new SqliteConnection(GlobalConfig.ConnectionString))
+            using (SqliteConnection conn = new SqliteConnection(Database._connectionString))
             {
                 conn.Open();
                 using (SqliteCommand command = conn.CreateCommand())
@@ -84,7 +85,7 @@ namespace DataLayer
         {
             object? result;
 
-            using (SqliteConnection conn = new SqliteConnection(GlobalConfig.ConnectionString))
+            using (SqliteConnection conn = new SqliteConnection(Database._connectionString))
             {
                 conn.Open();
                 using (SqliteCommand command = conn.CreateCommand())
@@ -108,16 +109,16 @@ namespace DataLayer
 
         public static void CreateDatabase()
         {
-            if (!File.Exists("database.db"))
+            if (!File.Exists(GlobalConfig.DatabasePath))
             {
                 ExecuteNonQuery("");
             }
         }
         public static void DropDatabase()
         {
-            if (File.Exists("database.db"))
+            if (File.Exists(GlobalConfig.DatabasePath))
             {
-                File.Delete("database.db");
+                File.Delete(GlobalConfig.DatabasePath);
             }
         }
 
