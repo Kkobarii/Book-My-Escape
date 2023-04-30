@@ -27,7 +27,6 @@ namespace DesktopApp
 
         private void LoadDataGrids()
         {
-            Debug.WriteLine("reloading grid");
             DataGrids = new Dictionary<string, DataGrid>();            
 
             DataGrids.Add("Users", new DataGrid()
@@ -173,7 +172,7 @@ namespace DesktopApp
 
             var type = selectedItem.GetType();
 
-            var result = MessageBox.Show("Are you sure?", "Confirmation", MessageBoxButton.YesNo);
+            var result = Xceed.Wpf.Toolkit.MessageBox.Show($"Are you sure you want to delete {selectedItem}?", "Confirmation", MessageBoxButton.YesNo);
             if (result == MessageBoxResult.No) { return; }
 
             Database.Delete(type, selectedItem);
