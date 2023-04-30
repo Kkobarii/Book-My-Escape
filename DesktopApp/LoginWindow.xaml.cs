@@ -29,10 +29,14 @@ namespace DesktopApp
 
         private async void Button_Click(object sender, RoutedEventArgs e)
         {
+            Database.CreateDatabase();
+            Database.CreateTable<Room>();
+            Database.CreateTable<Reservation>();
+            Database.CreateTable<User>();
+            Database.CreateTable<Review>();
+
             Email = txtEmail.Text;
             Password = Encryption.Encrypt(txtPassword.Password);
-
-            Debug.WriteLine(Password);
 
             if (string.IsNullOrEmpty(Email) || string.IsNullOrEmpty(Password))
             {
