@@ -16,6 +16,7 @@ namespace DataLayer.Models
         public User User { get; set; }
         [DbForeignKey, DbColumnName("RoomId")]
         public Room Room { get; set; }
+        public int PlayerCount { get; set; }
         public DateTime CheckIn { get; set; }
         public DateTime CheckOut { get; set; }
 
