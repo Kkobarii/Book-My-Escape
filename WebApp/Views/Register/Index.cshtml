@@ -1,9 +1,9 @@
 ﻿@{
-    ViewData["Title"] = "Register Page";
+    ViewData["Title"] = "Register";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1 class="display-4">Register Form</h1>
+<h1 class="display-4">@ViewData["Title"]</h1>
 @model RegisterViewModel
 @using (Html.BeginForm("Index", "Register", FormMethod.Post))
 {

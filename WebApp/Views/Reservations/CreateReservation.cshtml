@@ -2,12 +2,12 @@
 @using DataLayer.Models;
 
 @{
-	ViewData["Title"] = "Escape rooms";
+	ViewData["Title"] = "Create a reservation";
 	Layout = "~/Views/Shared/_Layout.cshtml";
 	int placeCount = ViewBag.Room.Capacity;
 }
 
-<h1 class="display-4">Create reservation</h1>
+<h1 class="display-4">@ViewData["Title"]</h1>
 <div class="container-md">
 
         <div class="card mt-3">

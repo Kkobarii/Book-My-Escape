@@ -1,9 +1,9 @@
 ﻿@{
-    ViewData["Title"] = "Login Page";
+    ViewData["Title"] = "Log in";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1 class="display-4">Login Form</h1>
+<h1 class="display-4">@ViewData["Title"]</h1>
 @model LoginViewModel
 @using (Html.BeginForm("Index", "Login", FormMethod.Post))
 {

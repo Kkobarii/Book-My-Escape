@@ -1,10 +1,10 @@
 ﻿@using DataLayer.Models;
 @{
-    ViewData["Title"] = "Reservations";
+    ViewData["Title"] = "My Reservations";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1 class="display-4">Reservations</h1>
+<h1 class="display-4">@ViewData["Title"]</h1>
 <div class="container-md">
 @foreach (Reservation reservation in ViewBag.Reservations)
     {
