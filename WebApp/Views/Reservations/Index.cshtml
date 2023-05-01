@@ -9,15 +9,15 @@
 @foreach (Reservation reservation in ViewBag.Reservations)
     {
         <div class="card mt-3">
-            <div class="card-header bg-primary text-white">
+            <div class="card-header clr-primary text-white">
                 <h4>@reservation.Room.Name</h4>
             </div>
             <div class="card-body">
                 <p class="card-text border border-secondary p-3 rounded-3">@reservation.Room.Description</p>
                 <p class="card-text">Date: @reservation.CheckIn - @reservation.CheckOut <br/>
                 Player count: @reservation.PlayerCount</p>
-                <a href="@Url.Action("DeleteReservation", "Reservations", new { id = reservation.Id })" class="btn btn-primary m-2">Delete reservation</a>
-                <a href="@Url.Action("CreateReview", "Reservations", new { id = reservation.Id })" class="btn btn-primary m-2">Create review</a>
+                <a href="@Url.Action("DeleteReservation", "Reservations", new { id = reservation.Id })" class="btn clr-btn-primary m-2">Delete reservation</a>
+                <a href="@Url.Action("CreateReview", "Reservations", new { id = reservation.Id })" class="btn clr-btn-primary m-2">Create review</a>
             </div>
         </div>
     }

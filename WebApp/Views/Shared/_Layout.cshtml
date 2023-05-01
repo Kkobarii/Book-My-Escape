@@ -7,13 +7,30 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/WebApp.styles.css" asp-append-version="true" />
+    <style>
+        .clr-primary {
+            color: #fff;
+            background-color: #3285d2;
+            border-color: #3285d2;
+        }
+        .clr-btn-primary {
+            color: #fff;
+            background-color: #3285d2;
+            border-color: #3285d2;
+        }
+        .clr-btn-primary:hover {
+          color: #fff;
+          background-color: #1d78cd;
+          border-color: #1d78cd;
+        }
+    </style>
 </head>
 
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light clr-primary border-bottom box-shadow mb-3">
             <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Book My Escape</a>
+                <a class="navbar-brand text-white" asp-area="" asp-controller="Home" asp-action="Index"><b>Book My Escape</b></a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -21,16 +38,16 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                                 <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="EscapeRooms" asp-action="Index">Escape Rooms</a>
+                                    <a class="nav-link text-white" asp-area="" asp-controller="EscapeRooms" asp-action="Index">Escape Rooms</a>
                                 </li>
                         @{
                             if (LoggedInSingleton.Instance.LoggedInUser != null)
                             {
                                 <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Reservations" asp-action="Index">Reservations</a>
+                                    <a class="nav-link text-white" asp-area="" asp-controller="Reservations" asp-action="Index">Reservations</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Index">Account</a>
+                                    <a class="nav-link text-white" asp-area="" asp-controller="Account" asp-action="Index">Account</a>
                                 </li>
                             }
                         }
@@ -41,13 +58,13 @@
                     if (LoggedInSingleton.Instance.LoggedInUser == null)
                     {
                         <label class="margin-label">Not logged in</label>
-                        <button class="btn btn-success margin-label" onclick="location.href='@Url.Action("Index","Login")'">Log In</button>
-                        <button class="btn btn-success margin-label" onclick="location.href='@Url.Action("Index","Register")'">Register</button>
+                        <button class="btn bg-white margin-label" onclick="location.href='@Url.Action("Index","Login")'">Log In</button>
+                        <button class="btn bg-white margin-label" onclick="location.href='@Url.Action("Index","Register")'">Register</button>
                     }
                     else
                     {
                         <label class="margin-label">Logged in as @LoggedInSingleton.Instance.LoggedInUser.ToString()</label>
-						<button class="btn btn-danger margin-label" onclick="location.href='@Url.Action("Logout","Home")'">Log Out</button>					
+						<button class="btn bg-white margin-label" onclick="location.href='@Url.Action("Logout","Home")'">Log Out</button>					
                     }
                 }
                 </div>

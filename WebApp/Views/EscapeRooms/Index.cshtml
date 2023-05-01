@@ -11,7 +11,7 @@
 @foreach (Room room in ViewBag.Rooms)
 {
     <div class="card mt-3">
-        <div class="card-header bg-primary text-white">
+        <div class="card-header clr-primary text-white">
             <h4>@room.Name</h4>
         </div>
         <div class="card-body">
@@ -20,11 +20,11 @@
 			        <p>Capacity: @room.Capacity <br>
 			        Price: @room.Price</p>
                 </div>
-			<a href="@Url.Action("Detail", "EscapeRooms", new { id = room.Id })" class="btn btn-primary m-2">Detail</a>
+			<a href="@Url.Action("Detail", "EscapeRooms", new { id = room.Id })" class="btn clr-primary m-2">Detail</a>
             @{
                 if (LoggedInSingleton.Instance.LoggedInUser != null)
                 {
-			        <a href="@Url.Action("CreateReservation", "Reservations", new { id = room.Id })" class="btn btn-primary m-2">Reserve</a>
+			        <a href="@Url.Action("CreateReservation", "Reservations", new { id = room.Id })" class="btn clr-primary m-2">Reserve</a>
                 }
 			}
         </div>
