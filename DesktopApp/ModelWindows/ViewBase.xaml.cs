@@ -26,6 +26,7 @@ namespace DesktopApp.ModelWindows
         public ViewGeneric(T? value)
         {
             InitializeComponent();
+            WindowTitle.Content = typeof(T).Name + " Detail";
 
             if (value != null)
             {

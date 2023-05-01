@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DesktopApp"
         mc:Ignorable="d" WindowStartupLocation="CenterScreen"
-        Title="MainWindow" Height="500" Width="900" MinHeight="200" MinWidth="300">
+        Title="MainWindow" Height="500" Width="900" MinHeight="300" MinWidth="500">
     <Grid>
 
         <DockPanel Background="CornflowerBlue" VerticalAlignment="Top" LastChildFill="False">

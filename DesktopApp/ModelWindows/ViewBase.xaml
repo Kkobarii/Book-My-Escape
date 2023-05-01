@@ -6,7 +6,7 @@
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         xmlns:local="clr-namespace:DesktopApp.ModelWindows"
         mc:Ignorable="d"
-        Title="ViewGeneric" Height="450" Width="800" MinHeight="450" MinWidth="800">
+        Title="ViewGeneric" Height="450" Width="800" MinHeight="300" MinWidth="500">
     
     <DockPanel>
         
