@@ -1,0 +1,19 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome to Book My Escape!</h1>
+    @{
+        if (LoggedInSingleton.Instance.LoggedInUser == null)
+		{
+            <p class="lead mt-5">Escape the Mundane: Enter the Unknown</p>
+            <p class="lead">If you want to make a reservation, <a href="@Url.Action("Index","Login")">Login</a> or <a href="@Url.Action("Index","Register")">Register</a> to continue.</p>
+        }
+        else
+        {
+            <p class="lead mt-5">Escape the Mundane: Enter the Unknown</p>	
+        }
+    }
+</div>

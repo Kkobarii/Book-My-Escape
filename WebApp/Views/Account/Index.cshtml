@@ -1,0 +1,24 @@
+﻿@{
+    ViewData["Title"] = "Account";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1 class="display-4">My Account</h1>
+<div class="align-content-center container-md border border-secondary p-3 rounded-3">
+    <div class="md-2">
+        <label>First name</label>
+        <input type="text" class="form-control" value="@LoggedInSingleton.Instance.LoggedInUser!.FirstName" readonly>
+    </div>
+    <div class="md-2">
+		<label>Last name</label>
+		<input type="text" class="form-control" value="@LoggedInSingleton.Instance.LoggedInUser!.LastName" readonly>
+    </div>
+    <div class="md-2">
+        <label>Email</label>
+		<input type="text" class="form-control" value="@LoggedInSingleton.Instance.LoggedInUser!.Email" readonly>
+	</div>
+    <div class="md-2">
+		<label>Phone number</label>
+		<input type="text" class="form-control" value="@LoggedInSingleton.Instance.LoggedInUser!.PhoneNumber" readonly>
+    </div>
+</div>

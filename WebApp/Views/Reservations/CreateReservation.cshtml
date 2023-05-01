@@ -1,0 +1,55 @@
+﻿@using DataLayer;
+@using DataLayer.Models;
+
+@{
+	ViewData["Title"] = "Escape rooms";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+	int placeCount = ViewBag.Room.Capacity;
+}
+
+<h1 class="display-4">Create reservation</h1>
+<div class="container-md">
+
+        <div class="card mt-3">
+            <div class="card-header bg-primary text-white">
+                <h4>@ViewBag.Room.Name</h4>
+            </div>
+            <div class="card-body">
+                <p class="card-text border border-secondary p-3 rounded-3">@ViewBag.Room.Description</p>
+				<p class="card-text">Capacity: @ViewBag.Room.Capacity <br/>
+				Price: @ViewBag.Room.Price</p>
+            </div>
+        </div>
+        <div>
+            @model ReservationViewModel
+			@using (Html.BeginForm("CreateReservation", "Reservations", FormMethod.Post))
+			{
+				<div class="form-group mt-2">
+					<div class="row">
+						<div class="col-4">@Html.LabelFor(m => m.CheckIn, new { @class = "form-label" })</div>						
+						<div class="col text-end text-danger">@Html.ValidationMessageFor(x => x.CheckIn)</div>
+					</div>
+					@Html.EditorFor(m => m.CheckIn, new { @class = "form-control" })
+				</div>
+				<div class="form-group mt-2">
+					<div class="row">
+						<div class="col-4">@Html.LabelFor(m => m.CheckOut, new { @class = "form-label" })</div>
+						<div class="col text-end text-danger">@Html.ValidationMessageFor(x => x.CheckOut)</div>
+					</div>
+					@Html.EditorFor(m => m.CheckOut, new { @class = "form-control" })
+				</div>
+				<div class="form-group mt-2">
+					<div class="row">
+						<div class="col-4">@Html.LabelFor(m => m.PlayerCount, new { @class = "form-label" })</div>						
+						<div class="col text-end text-danger">@Html.ValidationMessageFor(x => x.PlayerCount)</div>
+					</div>
+					@Html.TextBoxFor(m => m.PlayerCount, new { @class = "form-control", @type = "number", @min = 0, @max = placeCount })
+				</div>
+
+				<div class="mt-2">
+					<button type="submit" class="btn btn-primary">Submit</button> <label>@ViewBag.Message</label>
+				</div>
+			}
+        </div>
+
+</div>

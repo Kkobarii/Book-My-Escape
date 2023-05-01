@@ -1,0 +1,33 @@
+﻿@using DataLayer;
+@using DataLayer.Models;
+
+@{    
+    ViewData["Title"] = "Escape rooms";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1 class="display-4">Escape Rooms</h1>
+<div class="container-md">
+@foreach (Room room in ViewBag.Rooms)
+{
+    <div class="card mt-3">
+        <div class="card-header bg-primary text-white">
+            <h4>@room.Name</h4>
+        </div>
+        <div class="card-body">
+            <div class="card-text">
+                    <dir class="mt-3 border border-secondary p-3 rounded-3">@room.Description</dir>
+			        <p>Capacity: @room.Capacity <br>
+			        Price: @room.Price</p>
+                </div>
+			<a href="@Url.Action("Detail", "EscapeRooms", new { id = room.Id })" class="btn btn-primary m-2">Detail</a>
+            @{
+                if (LoggedInSingleton.Instance.LoggedInUser != null)
+                {
+			        <a href="@Url.Action("CreateReservation", "Reservations", new { id = room.Id })" class="btn btn-primary m-2">Reserve</a>
+                }
+			}
+        </div>
+    </div>
+}
+</div>
