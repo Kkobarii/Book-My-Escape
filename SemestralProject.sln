@@ -6,7 +6,6 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{036D11FC-0F70-4FE9-B0B0-2E7CEE3B6EA6}"
 	ProjectSection(SolutionItems) = preProject
 		README.md = README.md
-		Testing\Testing.csproj.user = Testing\Testing.csproj.user
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataLayer", "DataLayer\DataLayer.csproj", "{52754943-D6A8-4E1F-90DD-04777FE0979E}"
@@ -17,11 +16,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DesktopApp", "DesktopApp\De
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApp", "WebApp\WebApp.csproj", "{35CAB4E5-359D-4543-B339-E3AD31234B91}"
-	ProjectSection(ProjectDependencies) = postProject
-		{52754943-D6A8-4E1F-90DD-04777FE0979E} = {52754943-D6A8-4E1F-90DD-04777FE0979E}
-	EndProjectSection
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Testing", "Testing\Testing.csproj", "{740F0CAC-D0F2-400E-839C-B15B027F69C0}"
 	ProjectSection(ProjectDependencies) = postProject
 		{52754943-D6A8-4E1F-90DD-04777FE0979E} = {52754943-D6A8-4E1F-90DD-04777FE0979E}
 	EndProjectSection
@@ -44,10 +38,6 @@ Global
 		{35CAB4E5-359D-4543-B339-E3AD31234B91}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{35CAB4E5-359D-4543-B339-E3AD31234B91}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{35CAB4E5-359D-4543-B339-E3AD31234B91}.Release|Any CPU.Build.0 = Release|Any CPU
-		{740F0CAC-D0F2-400E-839C-B15B027F69C0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{740F0CAC-D0F2-400E-839C-B15B027F69C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{740F0CAC-D0F2-400E-839C-B15B027F69C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{740F0CAC-D0F2-400E-839C-B15B027F69C0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
