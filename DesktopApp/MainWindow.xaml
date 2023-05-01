@@ -4,8 +4,8 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DesktopApp"
-        mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800" MinHeight="200" MinWidth="300">
+        mc:Ignorable="d" WindowStartupLocation="CenterScreen"
+        Title="MainWindow" Height="500" Width="900" MinHeight="200" MinWidth="300">
     <Grid>
 
         <DockPanel Background="CornflowerBlue" VerticalAlignment="Top" LastChildFill="False">
@@ -16,7 +16,8 @@
         </DockPanel>
 
         <Grid>
-            <TabControl x:Name="TabControl" Margin="0,58,0,0">
+            <TabControl x:Name="TabControl" Margin="0,54,0,0" BorderThickness="2" BorderBrush="LightBlue" Background="LightGray"
+                        FontSize="16">
             </TabControl>
         </Grid>
 

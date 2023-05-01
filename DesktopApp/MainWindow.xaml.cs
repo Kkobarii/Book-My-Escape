@@ -33,25 +33,62 @@ namespace DesktopApp
             {
                 ItemsSource = Database.Select<User>(),
                 AutoGenerateColumns = false,
-                IsReadOnly = true
+                IsReadOnly = true,
+                Style = new Style(typeof(DataGrid))
+                {
+                    Setters =
+                        {
+                            new Setter(DataGrid.FontSizeProperty, 16.0)
+                        }
+                },
+                GridLinesVisibility = DataGridGridLinesVisibility.None,
+                AlternatingRowBackground = System.Windows.Media.Brushes.LightGray
             });
             DataGrids.Add("Rooms", new DataGrid()
             {
                 ItemsSource = Database.Select<Room>(),
                 AutoGenerateColumns = false,
-                IsReadOnly = true
+                IsReadOnly = true,
+                Style = new Style(typeof(DataGrid))
+                {
+                    Setters =
+                        {
+                            new Setter(DataGrid.FontSizeProperty, 16.0),
+                        }
+
+                },
+                GridLinesVisibility = DataGridGridLinesVisibility.None,
+                AlternatingRowBackground = System.Windows.Media.Brushes.LightGray
             });
             DataGrids.Add("Reservation", new DataGrid()
             {
                 ItemsSource = Database.Select<Reservation>(),
                 AutoGenerateColumns = false,
-                IsReadOnly = true
+                IsReadOnly = true,
+                Style = new Style(typeof(DataGrid))
+                {
+                    Setters =
+                        {
+                            new Setter(DataGrid.FontSizeProperty, 16.0)
+                        }
+                },
+                GridLinesVisibility = DataGridGridLinesVisibility.None,
+                AlternatingRowBackground = System.Windows.Media.Brushes.LightGray
             });
             DataGrids.Add("Reviews", new DataGrid()
             {
                 ItemsSource = Database.Select<Review>(),
                 AutoGenerateColumns = false,
-                IsReadOnly = true
+                IsReadOnly = true,
+                Style = new Style(typeof(DataGrid))
+                {
+                    Setters =
+                        {
+                            new Setter(DataGrid.FontSizeProperty, 16.0)
+                        }
+                },
+                GridLinesVisibility = DataGridGridLinesVisibility.None,
+                AlternatingRowBackground = System.Windows.Media.Brushes.LightGray
             });
 
             foreach (var item in DataGrids)
@@ -61,16 +98,17 @@ namespace DesktopApp
                 foreach (var property in properties)
                 {
                     var columnName = property.Name;
+                    List<string> stretchCols = new List<string>() { "Description", "FirstName", "LastName", "Text", "CheckIn", "CheckOut" };
                     var column = new DataGridTextColumn()
                     {
                         Header = columnName,
                         Binding = new Binding(columnName)
                     };
-                    if (Mapper.CheckAttribute<DbPrimaryKeyAttribute>(property))
+                    if (Mapper.CheckAttribute<DbPrimaryKeyAttribute>(property) || property.PropertyType == typeof(int))
                     {
                         column.IsReadOnly = true;
                     }
-                    else
+                    if (stretchCols.Find(x => x == columnName) != null)
                     {
                         column.Width = new DataGridLength(1, DataGridLengthUnitType.Star);
                     }
@@ -78,8 +116,8 @@ namespace DesktopApp
                 }
             }
 
-            // if tabs are loaded, return
             TabControl.Items.Clear();
+            TabControl.ItemsPanel = new ItemsPanelTemplate(new FrameworkElementFactory(typeof(WrapPanel)));
 
             foreach (var item in DataGrids)
             {
