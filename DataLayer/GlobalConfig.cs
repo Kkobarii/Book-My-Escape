@@ -8,7 +8,9 @@
             {
                 string path = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().GetName().CodeBase)!;
 
-                path = path.Substring(0, path.IndexOf("SemestralProject\\") + 17);
+                path = path.Substring(0, path.IndexOf("\\bin\\"));
+                path = path.Substring(0, path.LastIndexOf("\\") + 1);
+
                 path = path.Substring(6);
                 path += "Assets\\";
 
