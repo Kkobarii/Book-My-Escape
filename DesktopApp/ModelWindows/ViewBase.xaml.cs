@@ -225,7 +225,7 @@ namespace DesktopApp.ModelWindows
 
         public override void Cancel_Click(object sender, RoutedEventArgs e)
         {
-            var result = Xceed.Wpf.Toolkit.MessageBox.Show("Are you sure? All your edit will be lost.", "Confirmation", MessageBoxButton.YesNo);
+            var result = Xceed.Wpf.Toolkit.MessageBox.Show("Are you sure you want to cancel? All your changes will be lost.", "Confirmation", MessageBoxButton.YesNo);
             if (result == MessageBoxResult.No) { return; }
 
             DialogResult = false;
