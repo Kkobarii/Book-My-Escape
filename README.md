@@ -23,4 +23,5 @@ The aim of this project is to create a simple escape room reservation system and
 - Used for customers.
 - Allows overview of available escape rooms and their reviews for unregistered users.
 - Users with an account can reserve rooms and leave reviews for their reservations.
+- They can also export their reservations as a JSON.
 - Sadly no dark theme because my bootstrap is outdated.
