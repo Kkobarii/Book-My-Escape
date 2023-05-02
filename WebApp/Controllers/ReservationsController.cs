@@ -39,7 +39,7 @@ namespace WebApp.Controllers
                 return RedirectToAction("Index", "Home");
             }
 
-            ViewBag.Room = Database.Select<Room>(id).First(); ;
+            ViewBag.Room = Database.Select<Room>(id).First();
 
             return View();
         }
@@ -48,7 +48,8 @@ namespace WebApp.Controllers
         public IActionResult CreateReservation(ReservationViewModel form, long id)
         {
 			var room = Database.Select<Room>(id).First();
-			ViewBag.Room = Database.Select<Room>(id).First();
+			ViewBag.Room = room;
+
 			if (!ModelState.IsValid)
             {
 				return View();
@@ -97,7 +98,9 @@ namespace WebApp.Controllers
 			}
 
             var reservation = Database.Select<Reservation>(id).First();
-			Database.Delete<Reservation>(reservation);
+
+            Database.Delete(reservation);
+
 			return RedirectToAction("Index", "Reservations");
 		}
 
@@ -116,6 +119,7 @@ namespace WebApp.Controllers
         public IActionResult CreateReview(ReviewViewModel form, long id) 
         { 
             ViewBag.Reservation = Database.Select<Reservation>(id).First();
+
 			if (!ModelState.IsValid)
             {
 				return View();
@@ -128,11 +132,13 @@ namespace WebApp.Controllers
             {
 				return RedirectToAction("Index", "Home");
 			}
+
 			var room = Database.Select<Reservation>(id).First().Room;
 			if (room == null)
             {
 				return RedirectToAction("Index", "Home");
 			}
+
 			var user = LoggedInSingleton.Instance.LoggedInUser;
 			var review = new Review()
             {
@@ -141,7 +147,10 @@ namespace WebApp.Controllers
 				Rating = form.Rating,
 				Text = form.Text
 			};
-			Database.Insert(review);
+
+            Thread t = new Thread(() => { Database.Insert(review); });
+            t.Start();
+			
 			return RedirectToAction("Index", "Reservations");
         }
     }

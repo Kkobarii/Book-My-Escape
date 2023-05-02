@@ -47,7 +47,8 @@ namespace WebApp.Controllers
                 PhoneNumber = form.PhoneNumber
             };
 
-            Database.Insert(user);
+            Thread t = new Thread(() => { Database.Insert(user); });
+            t.Start();            
 
             LoggedInSingleton.Instance.LoggedInUser = user;
 
