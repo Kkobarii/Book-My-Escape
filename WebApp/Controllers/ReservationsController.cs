@@ -1,12 +1,16 @@
 ﻿using DataLayer;
 using DataLayer.Models;
 using Microsoft.AspNetCore.Mvc;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using WebApp.Models;
 
 namespace WebApp.Controllers
 {
     public class ReservationsController : Controller
     {
+        public object StringStream { get; private set; }
+
         private int GetFreeSpacesCount(Room room, DateTime checkIn, DateTime checkOut)
         {
             var reservations = Database.Select<Reservation>("RoomId", room.Id!);
@@ -152,6 +156,38 @@ namespace WebApp.Controllers
             t.Start();
 			
 			return RedirectToAction("Index", "Reservations");
+        }
+
+        private async void ExportReservations()
+        {
+            var reservations = Database.Select<Reservation>("UserId", LoggedInSingleton.Instance.LoggedInUser!.Id!);
+            string path = GlobalConfig.AssetsPath + "reservations.json";
+            
+            await using var stream = new MemoryStream();
+            var options = new JsonSerializerOptions
+            {
+                WriteIndented = true,
+                Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping,
+                DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull
+            };
+            await JsonSerializer.SerializeAsync(stream, reservations, options);
+
+            stream.Position = 0;
+            using var reader = new StreamReader(stream);
+            string json = await reader.ReadToEndAsync();
+
+            System.IO.File.WriteAllText(path, json);
+        }
+        
+        public IActionResult Export()
+        {
+            if (LoggedInSingleton.Instance.LoggedInUser == null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
+            ExportReservations();
+            return RedirectToAction("Index");
         }
     }
 }

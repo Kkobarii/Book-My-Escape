@@ -4,7 +4,11 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1 class="display-4">@ViewData["Title"]</h1>
+<div class="row">
+    <div class="col"><h1 class="display-4">@ViewData["Title"]</h1></div>
+    <div class="col text-end align-text-bottom"><a href="@Url.Action("Export", "Reservations", new { })" class="btn clr-btn-primary m-2">Export reservations</a></div>
+</div>
+
 <div class="container-md">
 @foreach (Reservation reservation in ViewBag.Reservations)
     {
