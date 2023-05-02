@@ -161,22 +161,27 @@ namespace WebApp.Controllers
         private async void ExportReservations()
         {
             var reservations = Database.Select<Reservation>("UserId", LoggedInSingleton.Instance.LoggedInUser!.Id!);
+            
+            if (!Directory.Exists(GlobalConfig.AssetsPath))
+            {
+                Directory.CreateDirectory(GlobalConfig.AssetsPath);
+            }
             string path = GlobalConfig.AssetsPath + "reservations.json";
             
-            await using var stream = new MemoryStream();
+            using var stream = new MemoryStream();
             var options = new JsonSerializerOptions
             {
                 WriteIndented = true,
                 Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping,
                 DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull
             };
-            await JsonSerializer.SerializeAsync(stream, reservations, options);
 
+            await JsonSerializer.SerializeAsync(stream, reservations, options);
             stream.Position = 0;
             using var reader = new StreamReader(stream);
             string json = await reader.ReadToEndAsync();
 
-            System.IO.File.WriteAllText(path, json);
+            await System.IO.File.WriteAllTextAsync(path, json);
         }
         
         public IActionResult Export()
