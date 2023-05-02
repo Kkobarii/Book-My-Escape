@@ -7,7 +7,7 @@ The aim of this project is to create a simple escape room reservation system and
 ## Data layer
 
 - Custom Database client for basic CRUD operations.
-- Everything is made using reflection - very nice.
+- Everything is made using reflection - very nice and reusable.
 
 ## Desktop application
 
