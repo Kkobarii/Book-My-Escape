@@ -17,8 +17,6 @@
                 if (!System.IO.Directory.Exists(path))
                     System.IO.Directory.CreateDirectory(path);
 
-                Console.WriteLine(path);
-
                 return path;
             }
             set
