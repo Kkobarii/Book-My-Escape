@@ -7,7 +7,7 @@ The aim of this project is to create a simple escape room reservation system and
 ## Data layer
 
 - Custom Database client for basic CRUD operations.
-- Built with SQLite in mind.
+- Built with SQLite, if you want to use any other SQL database, the code will have to be refactored.
 - Everything is made using reflection - very nice.
 
 ## Desktop application
@@ -25,4 +25,6 @@ The aim of this project is to create a simple escape room reservation system and
 - Allows overview of available escape rooms and their reviews for unregistered users.
 - Users with an account can reserve rooms and leave reviews for their reservations.
 - They can also export their reservations as a JSON.
+- Logged in user is stored in a singleton, so only one client can be logged in at a time.
+	- This is a very bad idea, but i find it funny.
 - Sadly no dark theme because my bootstrap is outdated.
