@@ -157,8 +157,8 @@ namespace WebApp.Controllers
 			
 			return RedirectToAction("Index", "Reservations");
         }
-
-        private async void ExportReservations()
+        
+        private async Task ExportReservations()
         {
             var reservations = Database.Select<Reservation>("UserId", LoggedInSingleton.Instance.LoggedInUser!.Id!);
             
@@ -184,14 +184,14 @@ namespace WebApp.Controllers
             await System.IO.File.WriteAllTextAsync(path, json);
         }
         
-        public IActionResult Export()
+        public async Task<IActionResult> Export()
         {
             if (LoggedInSingleton.Instance.LoggedInUser == null)
             {
                 return RedirectToAction("Index", "Home");
             }
 
-            ExportReservations();
+            await ExportReservations();
             return RedirectToAction("Index");
         }
     }
