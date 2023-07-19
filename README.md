@@ -18,6 +18,9 @@ The aim of this project is to create a simple escape room reservation system and
 - All of the windows are created generically and are not bound to the existing database entities.
 - Not made using Maui because it's pay to win.
 
+![desktop_1](.readme_examples/desktop_app.png)
+![desktop_2](.readme_examples/desktop_app_2.png)
+
 ## Web application
 
 - Web app made using ASP.NET Core.
@@ -28,3 +31,5 @@ The aim of this project is to create a simple escape room reservation system and
 - Logged in user is stored in a singleton, so only one client can be logged in at a time.
 	- This is a very bad idea, but i find it funny.
 - Sadly no dark theme because my bootstrap is outdated.
+
+![web_1](.readme_examples/web_app.png)
